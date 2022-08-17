@@ -22,7 +22,7 @@ Y_AXIS_KEY = "Y axis:"
 
 
 def br_text(text):
-    return "__" + text + "__"
+    return f"__{text}__"
 
 
 def clear_text(text):
@@ -76,7 +76,7 @@ def check_for_completeness(object):
 
 def random_string(string_length=10):
     letters = string.ascii_lowercase
-    return ''.join(random.choice(letters) for i in range(string_length))
+    return ''.join(random.choice(letters) for _ in range(string_length))
 
 
 def reparse_points(points):
@@ -119,10 +119,10 @@ def draw_plot(client, thing, block, page):
     if thing["x"] == "date":
         x_axis_dates()
 
-    filename = "images/" + random_string(15) + ".png"
+    filename = f"images/{random_string(15)}.png"
     plt.savefig(filename)
 
-    print("Uploading " + filename)
+    print(f"Uploading {filename}")
     photo.upload_file(filename)
 
 
@@ -169,7 +169,4 @@ def index(request):
         thread = Thread(target=plot)
         thread.start()
 
-        return HttpResponse("Hello, world.")
-
-    else:
-        return HttpResponse("Hello, world.")
+    return HttpResponse("Hello, world.")
